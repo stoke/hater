@@ -1,0 +1,20 @@
+{
+  "name"   : "hater",
+  "author" : "yawnt <yawn.localhost@gmail.com>",
+  "version": "0.0.1",
+
+  "dependencies": {
+    "pg"           : "0.8.1",
+    "eventemitter2": "0.4.9"
+  },
+
+  "devDependencies": {
+    "mocha" : "*",
+    "should": "*",
+    "assert": "*"
+  },
+
+  "scripts": {
+    "test": "mocha -R spec -r should test/*-test.js"
+  }
+}
