@@ -6,15 +6,15 @@
   "dependencies": {
     "pg"           : "0.8.1",
     "eventemitter2": "0.4.9",
-    "optimal"      : "0.0.3"
+    "optimal"      : "0.0.3",
+    "mysql"        : "2.0.0-alpha3"
   },
 
   "devDependencies": {
-    "mocha" : "*",
-    "should": "*",
+    "mocha"    : "*",
+    "should"   : "*",
     "expect.js": "*",
-    "assert": "*",
-    "mysql" : "2.0.0-alpha3"
+    "assert"   : "*"
   },
 
   "scripts": {
