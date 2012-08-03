@@ -12,7 +12,9 @@
   "devDependencies": {
     "mocha" : "*",
     "should": "*",
-    "assert": "*"
+    "expect.js": "*",
+    "assert": "*",
+    "mysql" : "2.0.0-alpha3"
   },
 
   "scripts": {
