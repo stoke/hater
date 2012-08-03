@@ -29,15 +29,16 @@ describe('mysql builder', function() {
     });
   });
 
-  describe('#where', function() {
-    it('should return rows according to the clause', function(done) {
+  describe('#limit', function() {
+    it('should return rows according to limit', function(done) {
       builder.select('test', '*')
-        .where({id: 1})
+        .limit(1)
         .exec(function(err, rows) {
           expect(err).to.not.be.ok();
-          expect(rows[0].id).to.be.equal(1);
+          expect(rows.length).to.be.equal(1);
           done();
         });
     });
   });
+
 });
