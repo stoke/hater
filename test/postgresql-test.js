@@ -3,7 +3,7 @@ var builder = require('../lib/builders/postgresql'),
     assert  = require('assert');
 
 before(function(done) {
-  exec('psql -f postgresql.sql', function() {
+  exec('psql -f postgresql-test.sql', function() {
     builder.connect('tcp://postgres@localhost/test');
     done();
   });
