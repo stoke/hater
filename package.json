@@ -5,7 +5,8 @@
 
   "dependencies": {
     "pg"           : "0.8.1",
-    "eventemitter2": "0.4.9"
+    "eventemitter2": "0.4.9",
+    "optimal"      : "0.0.3"
   },
 
   "devDependencies": {
