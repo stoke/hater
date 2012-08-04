@@ -1,4 +1,5 @@
 var builder = require('../lib/builders/postgresql'),
+    Query   = builder.Query;
     exec    = require('child_process').exec,
     assert  = require('assert');
 
@@ -13,7 +14,7 @@ describe('postgresql builder', function() {
   describe('#insert', function() {
   
     it('should insert row into the db', function(done) {
-      builder
+      new Query()
         .insert('test', { test: 'burp' })
         .exec(function(e, res) {
           assert.equal(e, null);
@@ -26,7 +27,7 @@ describe('postgresql builder', function() {
   describe('#select', function() {
 
     it('should select row from the db', function(done) {
-      builder
+      new Query()
         .select('test', '*')
         .where({test: 'burp'})
         .exec(function(e, res) {
