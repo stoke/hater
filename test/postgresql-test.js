@@ -11,11 +11,24 @@ before(function(done) {
 
 describe('postgresql builder', function() {
 
+  describe('#createTable', function() {
+
+    it('should create table', function(done) {
+      new Query()
+        .createTable('hater', { id: 'serial', test: 'varchar(32)'})
+        .exec(function(e) {
+          assert.equal(null, e);
+          done();
+        });
+    });
+
+  });
+
   describe('#insert', function() {
   
     it('should insert row into the db', function(done) {
       new Query()
-        .insert('test', { test: 'burp' })
+        .insert('hater', { test: 'burp' })
         .exec(function(e, res) {
           assert.equal(e, null);
           done();
@@ -28,7 +41,7 @@ describe('postgresql builder', function() {
 
     it('should select row from the db', function(done) {
       var query = new Query()
-        .select('test', '*')
+        .select('hater', '*')
         .where({test: 'burp'});
 
       query.on('success', function(data) {
@@ -38,6 +51,29 @@ describe('postgresql builder', function() {
 
       query.exec();
     });
+  });
+
+  describe('#update', function() {
+    
+    it('should update row in the db', function(done) {
+      new Query()
+        .update('hater', {test: 'asd'})
+        .where({id: 1})
+        .exec(function(e) {
+          assert.equal(null, e);
+        });
+
+    });
+  });
+
+  describe('#delete', function() {
+    var query = new Query()
+      .delete('hater')
+      .where({ id: 1 })
+      .exec(function(e) {
+        assert.equal(e, null);
+      });
+
   });
 
 });
