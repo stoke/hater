@@ -1,7 +1,10 @@
 {
-  "name"   : "hater",
-  "author" : "yawnt <yawn.localhost@gmail.com>",
-  "version": "0.0.1",
+  "name"        : "hater",
+  "author"      : "yawnt <yawn.localhost@gmail.com>",
+  "contributors": [
+    "stoke <stoke@urlship.com>"
+  ],
+  "version"     : "0.0.1",
 
   "dependencies": {
     "pg"           : "0.8.1",
