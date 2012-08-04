@@ -5,7 +5,6 @@ var builder = require('../lib/builders/mysql'),
 before(function(done) {
   exec('mysql -u '+process.env.MYSQL_USERNAME+' -p'+process.env.MYSQL_PASSWORD+' < mysql-test.sql', function() { // populating db ugly-and-lazy style
     var c = builder.connect('mysql://'+process.env.MYSQL_USERNAME+':'+process.env.MYSQL_PASSWORD+'@localhost/test');
-    console.log(builder.escape('lol'));
     done();
   });
 });
@@ -44,7 +43,18 @@ describe('mysql builder', function() {
 
   describe('#insert', function() {
     it('should insert data into table', function(done) {
-      builder.insert('test', {'test.test': 'asd'}, function(err) {
+      builder.insert('test', {'test': 'testa'}, function(err) {
+        expect(err).to.not.be.ok();
+        done();
+      });
+    });
+  });
+
+  describe('#update', function() {
+    it('should update data', function(done) {
+      builder.update('test', {'test': 'testo'})
+      .where({id: 1})
+      .exec(function(err) {
         expect(err).to.not.be.ok();
         done();
       });
