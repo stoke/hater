@@ -6,7 +6,11 @@ var builder = require('../lib/builders/postgresql'),
 
 before(function(done) {
   builder.connect('tcp://postgres@127.0.0.1/test');
-  done();
+  new Query()
+    .drop('hater')
+    .exec(function() {
+      done();
+    });
 });  
 
 describe('postgresql builder', function() {
@@ -61,6 +65,14 @@ describe('postgresql builder', function() {
         .where({id: 1})
         .exec(function(e) {
           assert.equal(null, e);
+          new Query()
+            .select('hater')
+            .where({ id: 1 })
+            .exec(function(e, r) {
+              (r && r[0] && r[0].test).should.equal('asd');
+              assert.equal(e, null);
+              done();
+            });
         });
 
     });
