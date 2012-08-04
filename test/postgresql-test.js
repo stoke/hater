@@ -27,14 +27,16 @@ describe('postgresql builder', function() {
   describe('#select', function() {
 
     it('should select row from the db', function(done) {
-      new Query()
+      var query = new Query()
         .select('test', '*')
-        .where({test: 'burp'})
-        .exec(function(e, res) {
-          res.length.should.equal(2);
-          assert.equal(e, null);
-          done();
-        }); 
+        .where({test: 'burp'});
+
+      query.on('success', function(data) {
+        data.length.should.equal(1);
+        done();
+      });
+
+      query.exec();
     });
   });
 
