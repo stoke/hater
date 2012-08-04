@@ -3,17 +3,22 @@ var builder = require('../lib/builders/postgresql'),
     exec    = require('child_process').exec,
     assert  = require('assert');
 
-
-before(function(done) {
-  builder.connect('tcp://postgres@127.0.0.1/test');
-  new Query()
-    .drop('hater')
-    .exec(function() {
-      done();
-    });
-});  
-
 describe('postgresql builder', function() {
+
+  builder.connect('tcp://postgres@127.0.0.1/test');
+
+  describe('#drop', function() {
+    
+    it('should drop table if exists from db', function(done) {
+      new Query()
+        .drop('hater')
+        .exec(function(e) {
+          assert.equal(null, e);
+          done();
+        });
+    });
+
+  });
 
   describe('#createTable', function() {
 
@@ -66,7 +71,7 @@ describe('postgresql builder', function() {
         .exec(function(e) {
           assert.equal(null, e);
           new Query()
-            .select('hater')
+            .select('hater', '*')
             .where({ id: 1 })
             .exec(function(e, r) {
               (r && r[0] && r[0].test).should.equal('asd');
@@ -79,13 +84,22 @@ describe('postgresql builder', function() {
   });
 
   describe('#delete', function() {
-    var query = new Query()
-      .delete('hater')
-      .where({ id: 1 })
-      .exec(function(e) {
-        assert.equal(e, null);
-      });
 
+    it('should delete row from db', function(done) {
+      var query = new Query()
+        .delete('hater')
+        .where({ id: 1 })
+        .exec(function(e) {
+          assert.equal(e, null);
+          new Query()
+            .select('hater', '*')
+            .where({id : 1})
+            .exec(function(e, res) {
+              res.length.should.equal(0);
+              done();
+            });
+        });
+    });
   });
 
 });
