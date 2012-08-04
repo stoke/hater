@@ -1,10 +1,10 @@
-create table if not exists test(
+CREATE TABLE IF NOT EXISTS test(
   id serial,
   test varchar(32)
 );
 
-insert into test (test) values ('testtest');
-insert into test (test) values ('harpdarp');
+INSERT INTO test (test) VALUES ('testtest');
+INSERT INTO test (test) VALUES ('harpdarp');
 
 
 

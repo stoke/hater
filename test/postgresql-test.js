@@ -2,23 +2,22 @@ var builder = require('../lib/builders/postgresql'),
     exec    = require('child_process').exec,
     assert  = require('assert');
 
-before(function(done) {
-  exec('psql -f postgresql-test.sql', function() {
-    builder.connect('tcp://postgres@localhost/test');
-    done();
-  });
-});
+builder.connect('tcp://postgres@127.0.0.1/test');
 
 describe('postgresql builder', function() {
 
-  describe('#select', function(done) {
-    builder
-      .select('test', '*')
-      .where({test: 'harpdarp'})
-      .exec(function(e, res) {
-        console.log(res);
-        done();
-      }); 
+  describe('#select', function() {
+
+    it('should select row from db', function(done) {
+      builder
+        .select('test', '*')
+        .where({test: 'harpdarp'})
+        .exec(function(e, res) {
+          res.length.should.equal(3);
+          assert.equal(e, null);
+          done();
+        }); 
+    });
   });
 
 });
