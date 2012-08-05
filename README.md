@@ -3,6 +3,8 @@ hater.js
 
 Hater is an ORM for relational databases.
 
+[![Build Status](https://secure.travis-ci.org/yawnt/hater.png?branch=master)](http://travis-ci.org/yawnt/hater)
+
 ## Installation
 
 ```
