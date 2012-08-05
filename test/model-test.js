@@ -36,6 +36,7 @@ describe('model', function() {
       m.create.should.be.a('function');
       m._table.should.equal('table');
       m._properties.should.be.a('object');
+      m.test.should.be.a('function');
 
     });
 
