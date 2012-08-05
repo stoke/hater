@@ -39,8 +39,7 @@ describe('mysql builder', function() {
     
   describe('#select', function() { 
     it('should return if called with a callback', function(done) {
-      new Query().select('test', '*', function(err, rows) {
-        expect(err).to.not.be.ok();
+      new Query().select('test', '*').exec().on('success', function(rows) {
         expect(rows).to.be.an('array');
         done()
       });
