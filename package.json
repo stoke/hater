@@ -10,7 +10,7 @@
     "pg"           : "0.8.1",
     "eventemitter2": "0.4.9",
     "optimal"      : "0.0.3",
-    "mysql"        : "2.0.0-alpha3"
+    "mysql"        : "git://github.com/stoke/node-mysql.git"
   },
 
   "devDependencies": {
