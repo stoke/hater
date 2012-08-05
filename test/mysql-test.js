@@ -1,18 +1,45 @@
 var builder = require('../lib/builders/mysql'),
+    Query   = builder.Query,
     exec    = require('child_process').exec,
     expect  = require('expect.js');
 
-before(function(done) {
-  exec('mysql -u '+process.env.MYSQL_USERNAME+' -p'+process.env.MYSQL_PASSWORD+' < mysql-test.sql', function() { // populating db ugly-and-lazy style
-    var c = builder.connect('mysql://'+process.env.MYSQL_USERNAME+':'+process.env.MYSQL_PASSWORD+'@localhost/test');
-    done();
-  });
+before(function() { 
+  var c = builder.connect('mysql://'+process.env.MYSQL_USERNAME+':'+process.env.MYSQL_PASSWORD+'@localhost/test');
 });
 
 describe('mysql builder', function() {
-  describe('#select', function() {
+  describe('#createTable', function() {
+    it('should create table', function(done) {
+      new Query().createTable('test', {id: 'int auto_increment primary key', test: 'varchar(32)'}, function(err) {
+        expect(err).to.not.be.ok();
+        done();
+      });
+    });
+  });
+
+  describe('#insert', function() {
+    it('should insert data into table', function(done) {
+      new Query().insert('test', {'test': 'testa'}, function(err) {
+        expect(err).to.not.be.ok();
+        done();
+      });
+    });
+  });
+
+  describe('#update', function() {
+    it('should update data', function(done) {
+      new Query().update('test', {'test': 'testo'})
+      .where({id: 1})
+      .exec(function(err) {
+        expect(err).to.not.be.ok();
+        done();
+      });
+    });
+  });
+    
+  describe('#select', function() { 
     it('should return if called with a callback', function(done) {
-      builder.select('test', '*', function(err, rows) {
+      new Query().select('test', '*', function(err, rows) {
         expect(err).to.not.be.ok();
         expect(rows).to.be.an('array');
         done()
@@ -20,7 +47,7 @@ describe('mysql builder', function() {
     });
 
     it('should return if called with #exec', function(done) {
-      builder.select('test', '*')
+      new Query().select('test', '*')
         .exec(function(err, rows) {
           expect(err).to.not.be.ok();
           expect(rows).to.be.an('array');
@@ -31,7 +58,7 @@ describe('mysql builder', function() {
 
   describe('#limit', function() {
     it('should return rows according to limit', function(done) {
-      builder.select('test', '*')
+      new Query().select('test', '*')
         .limit(1)
         .exec(function(err, rows) {
           expect(err).to.not.be.ok();
@@ -40,25 +67,4 @@ describe('mysql builder', function() {
         });
     });
   });
-
-  describe('#insert', function() {
-    it('should insert data into table', function(done) {
-      builder.insert('test', {'test': 'testa'}, function(err) {
-        expect(err).to.not.be.ok();
-        done();
-      });
-    });
-  });
-
-  describe('#update', function() {
-    it('should update data', function(done) {
-      builder.update('test', {'test': 'testo'})
-      .where({id: 1})
-      .exec(function(err) {
-        expect(err).to.not.be.ok();
-        done();
-      });
-    });
-  });
-
 });
