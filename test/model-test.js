@@ -17,8 +17,7 @@ describe('model', function() {
       Model.toJSON.should.be.a('function');
       Model.create.should.be.a('function');
       Model._table.should.equal('table');
-      Model.on.should.be.a('function');
-
+    
     });
 
   });
