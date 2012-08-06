@@ -1,4 +1,5 @@
 var hater  = require('../lib/hater'),
+    expect = require('expect.js'),
     assert = require('assert');
 
 hater.dialect('postgresql', 'tcp://postgres@localhost/test');
