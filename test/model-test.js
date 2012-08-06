@@ -2,68 +2,48 @@ var assert = require('assert'),
     expect = require('expect.js'),
     hater  = require('../lib/hater');
 
-var Model = hater.extend('test', {connection: 'mysql://'+process.env.MYSQL_USERNAME+':'+process.env.MYSQL_PASSWORD+'@localhost/test'}, {
+hater.dialect('postgresql', 'tcp://postgres@127.0.0.1/test');
+
+var Model = hater.extend('table', {
   test: function() {}
 });
 
-
 describe('model', function() {
-  describe('#create', function() {
-    it('should create a row', function(done) {
-      Model.create({test: 'test'}, function(e, r) {
-        expect(e).not.to.be.ok();
-        done();
-      });
+  
+  describe('Constructor', function() {
+
+    it('should have some properties', function() {
+
+      Model.update.should.be.a('function');
+      Model.destroy.should.be.a('function');
+      Model.find.should.be.a('function');
+      Model.toJSON.should.be.a('function');
+      Model.create.should.be.a('function');
+      Model._table.should.equal('table');
+                                                        
     });
+
   });
 
-  describe('find', function() {
-    it('should find rows', function(done) {
-      Model.find('*', function(e, r) {
-        expect(e).to.not.be.ok();
-        expect(r).to.be.an('array');
-        done();
-      });
+  describe('Instance', function() {
+
+    it('should have some properties', function() {
+
+      var m = new Model();
+
+      m.update.should.be.a('function');
+      m.destroy.should.be.a('function');
+      m.find.should.be.a('function');
+      m.toJSON.should.be.a('function');
+      m.create.should.be.a('function');
+      m._table.should.equal('table');
+      m._properties.should.be.a('object');
+      m.test.should.be.a('function');
+      m.on.should.be.a('function');
+
     });
+
   });
 
-  describe('#save', function() {
-    it('should create a row when called without id', function(done) {
-      var model = new Model({test: 'lol'});
-      model.save(function(e, r) {
-        expect(e).not.to.be.ok();
-        done();
-      });
-    });
-
-    it('should save the row when called from find (with id)', function(done) {
-      Model.find('*', function(e, r) {
-        r[0].set('test', 'testa');
-        r[0].save(function(e, r) {
-          expect(e).not.to.be.ok();
-          done();
-        });
-      });
-    });
-  });
-
-  describe('#destroy', function() {
-    it('should destroy the row when called from find (with id)', function(done) {
-      Model.find('*', function(e, r) {
-        r[0].destroy(function(e, r) {
-          expect(e).not.to.be.ok();
-          done();
-        });
-      });
-    });
-
-    it('should destroy the row', function(done) {
-      Model.find('*', function(e, r) {
-        Model.destroy({id: r[0].get('id')}, function(e, r) {
-          expect(e).not.to.be.ok();
-          done();
-        });
-      });
-    });
-  });
 });
+
