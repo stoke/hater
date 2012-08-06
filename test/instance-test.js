@@ -63,8 +63,11 @@ describe('Instance', function() {
     it('should destroy the row when called from find (with id)', function(done) {
       Model.find('*', function(e, r) {
         r[0].destroy(function(e, r) {
-          expect(e).not.to.be.ok();
-          done();
+          Model.find('*', function(e, v) {
+            expect(e).not.to.be.ok();
+            expect(r[0].get('id')).not.to.eql(v[0].get('id'));
+            done();
+          });
         });
       });
     });
