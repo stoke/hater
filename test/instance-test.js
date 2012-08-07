@@ -21,8 +21,6 @@ describe('Instance', function() {
     it('should create new row', function(done) {
       Model.create({ test: 'asd' }, function(e, res) {
         assert.equal(null, e);
-        res.get('id').should.be.a('number');
-        res.get('test').should.equal('asd');
         done();
       }); 
 
@@ -80,6 +78,26 @@ describe('Instance', function() {
           done();
         });
       });
+    });
+  });
+
+  describe('#sync', function() {
+    it('should create a table', function(done) {
+      var Model = hater.extend('testsync', {});
+      
+      Model.schema({
+        id: 'int auto_increment primary key',
+        test: 'varchar(32)'
+      });
+      
+      Model
+        .sync()
+        .on('error', function(err) {
+          throw err; // this should never happen
+        })
+        .on('success', function() {
+          done();
+        });
     });
   });
 
