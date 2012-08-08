@@ -8,7 +8,7 @@ var Model = hater.extend('instance', {});
 
 before(function(done) {
   new (hater.builder.Query)()
-    .createTable('instance', { id: 'serial', test: 'varchar(32)' })
+    .createTable('instances', { id: 'serial', test: 'varchar(32)' })
     .exec(function(e) {
       done();
     });
@@ -86,7 +86,7 @@ describe('Instance', function() {
       var Model = hater.extend('testsync', {});
       
       Model.schema({
-        id: 'int auto_increment primary key',
+        id: 'serial',
         test: 'varchar(32)'
       });
       
