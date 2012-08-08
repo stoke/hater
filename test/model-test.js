@@ -19,7 +19,7 @@ describe('model', function() {
       Model.find.should.be.a('function');
       Model.toJSON.should.be.a('function');
       Model.create.should.be.a('function');
-      Model._table.should.equal('table');
+      Model._table.should.equal('tables');
                                                         
     });
 
@@ -36,7 +36,7 @@ describe('model', function() {
       m.find.should.be.a('function');
       m.toJSON.should.be.a('function');
       m.create.should.be.a('function');
-      m._table.should.equal('table');
+      m._table.should.equal('tables');
       m._properties.should.be.a('object');
       m.test.should.be.a('function');
       m.on.should.be.a('function');
