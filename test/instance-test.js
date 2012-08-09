@@ -8,7 +8,7 @@ var Model = hater.extend('instance', {});
 
 before(function(done) {
   new (hater.builder.Query)()
-    .createTable('instances', { id: hater.Types.Serial(), test: hater.types.String({length: 32}) })
+    .createTable('instances', { id: hater.Types.Serial(), test: hater.Types.String({length: 32}) })
     .exec(function(e) {
       done();
     });
