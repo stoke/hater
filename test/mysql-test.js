@@ -4,7 +4,7 @@ var builder = require('../lib/builders/mysql'),
     expect  = require('expect.js');
 
 before(function() { 
-  var c = builder.connect('mysql://root@127.0.0.1/test');
+  var c = builder.connect('mysql://root:toor@127.0.0.1/test');
 });
 
 describe('mysql builder', function() {
