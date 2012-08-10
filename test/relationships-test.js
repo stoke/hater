@@ -28,8 +28,10 @@ describe('relationships', function() {
   describe('hasOne', function() {
 
     it('should inject correct methods', function() {
-      new Relationship().createRelationship2.should.be.a('function');
-      
+      var Model = new Relationship();
+
+      Model.createRelationship2.should.be.a('function');
+      Model.getRelationship2s.should.be.a('function');    
       Relationship._relationships.hasOne.indexOf('relationship2').should.not.equal(-1);
     });
 
