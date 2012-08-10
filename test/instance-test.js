@@ -6,12 +6,12 @@ hater.dialect('postgresql', 'tcp://postgres@localhost/test');
 
 var Model = hater.extend('instance', {});
 
-before(function(done) {
-  new (hater.builder.Query)()
-    .createTable('instances', { id: hater.Types.Serial(), test: hater.Types.String({length: 32}) })
-    .exec(function(e) {
-      done();
-    });
+Model.schema({
+  test: hater.Types.String({length: 32})
+});
+
+before(function() {
+  Model.sync();
 });
 
 describe('Instance', function() {
