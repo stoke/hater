@@ -13,7 +13,7 @@ Model.schema({
 describe('Instance', function() {
 
   before(function(done) {
-    Model.sync()
+    hater.sync()
       .on('success', done);
   });
 
@@ -79,26 +79,6 @@ describe('Instance', function() {
           done();
         });
       });
-    });
-  });
-
-  describe('#sync', function() {
-    it('should create a table', function(done) {
-      var Model = hater.extend('testsync', {});
-      
-      Model.schema({
-        id: 'serial',
-        test: 'varchar(32)'
-      });
-      
-      Model
-        .sync()
-        .on('error', function(err) {
-          throw err; // this should never happen
-        })
-        .on('success', function() {
-          done();
-        });
     });
   });
 

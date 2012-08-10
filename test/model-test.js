@@ -8,6 +8,10 @@ var Model = hater.extend('table', {
   test: function() {}
 });
 
+Model.schema({
+  test: hater.Types.String()
+});
+
 describe('model', function() {
   
   describe('Constructor', function() {
