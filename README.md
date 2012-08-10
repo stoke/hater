@@ -19,6 +19,17 @@ __Note:__ you should have an empty ```test``` database in postgres and mysql
 $ npm test
 ```
 
+## Contribute
+
+Wanna contribute? Awesome
+
+- Fork
+- Write tests
+- Fix/Patch/Add Code (do the magic dammit)
+- Submit Pull Request
+- If build passes (travis-bot checks for PRs), wait D:
+- PROFIT
+
 ## License
 
 MIT
