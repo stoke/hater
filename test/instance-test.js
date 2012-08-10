@@ -2,7 +2,7 @@ var hater  = require('../lib/hater'),
     expect = require('expect.js'),
     assert = require('assert');
 
-hater.dialect('postgresql', 'tcp://postgres@localhost/test');
+hater.dialect('mysql', 'mysql://root@localhost/test');
 
 var Model = hater.extend('instance', {});
 
@@ -10,12 +10,13 @@ Model.schema({
   test: hater.Types.String({length: 32})
 });
 
-before(function() {
-  Model.sync();
-});
-
 describe('Instance', function() {
- 
+
+  before(function(done) {
+    Model.sync()
+      .on('success', done);
+  });
+
   describe('#create', function() {
 
     it('should create new row', function(done) {

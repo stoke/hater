@@ -2,17 +2,18 @@ var assert = require('assert'),
     hater  = require('../lib/hater'),
     Types  = hater.Types;
 
-hater.dialect('postgresql', 'tcp://postgres@127.0.0.1/test');
+hater.dialect('mysql', 'mysql://root@127.0.0.1/test');
+
 var Relationship = hater.extend('relationship', {});
 
 Relationship.schema({
-  test: Types.String
+  test: Types.String()
 });
 
 var Relationship2 = hater.extend('relationship2', {});
 
 Relationship2.schema({
-  testo: Types.String
+  testo: Types.String()
 });
 
 Relationship.hasOne(Relationship2);

@@ -6,7 +6,7 @@ describe('hater', function() {
   describe('#extend', function() {
     
     it('should have .extend', function() {
-      hater.extend.should.be.a('function');
+      hater.extend.should.be.a('function');      
     });
 
   });

@@ -4,7 +4,7 @@ var builder = require('../lib/builders/mysql'),
     expect  = require('expect.js');
 
 before(function() { 
-  var c = builder.connect('mysql://root@127.0.0.1/test');
+  var c = builder.connect('mysql://root@localhost:3306/mysql');
 });
 
 describe('mysql builder', function() {
@@ -41,7 +41,7 @@ describe('mysql builder', function() {
     it('should return if called with a callback', function(done) {
       new Query().select('test', '*').exec().on('success', function(rows) {
         expect(rows).to.be.an('array');
-        done()
+        done();
       });
     });
 
