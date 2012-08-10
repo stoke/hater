@@ -36,4 +36,4 @@ MIT
 
 ## Hater?
 
-![Haters gonna hate](http://mylittlefacewhen.com/media/f/img/mlfw257_haters20gonna20hate.jpg)
+![Haters gonna hate](http://i.imgur.com/Wp2ck.jpg)
