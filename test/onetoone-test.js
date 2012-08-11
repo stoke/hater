@@ -32,9 +32,14 @@ describe('relationships', function() {
     
 
     it('should load with fetch', function(done) {
-      new Model({test: 1}).save(function(e, instance) {
-        Model.find({where: {id: instance.get('id')}, fetch: ["others"]}, function(e, res) {
-          assert.equal(true, Array.isArray(res[0].others));
+      var child = new Other({field: 2});
+      var model = new Model({test: 1});
+      
+      model.set('other', child);
+      model.save(function(e, instance) {
+        Model.find({where: {id: instance.get('id')}, fetch: ["other"]}, function(e, res) {
+          res[0].get('test').should.equal(1);
+          res[0].get('other').get('field').should.equal(2);
           done();
         });
       });
