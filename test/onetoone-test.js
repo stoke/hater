@@ -29,7 +29,16 @@ describe('relationships', function() {
       Model._schema.otherId.should.equal('INT');
       Other._schema.modelId.should.equal('INT');
     });
+    
 
+    it('should load with fetch', function(done) {
+      new Model({test: 'asd'}).save(function(e, instance) {
+        Model.find({where: {id: instance.get('id')}, fetch: ["others"]}, function(e, res) {
+          assert.equal(true, Array.isArray(res[0].others));
+          done();
+        });
+      });
+    });
   });
 
 });
