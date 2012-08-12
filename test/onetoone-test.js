@@ -40,7 +40,10 @@ describe('relationships', function() {
         Model.find({where: {id: instance.get('id')}, fetch: ["other"]}, function(e, res) {
           res[0].get('test').should.equal(1);
           res[0].get('other').get('field').should.equal(2);
-          done();
+          Other.find({where: {id: res[0].get('other').get('id')}, fetch: ["model"]}, function(e, res) {
+            res[0].get('model').get('test').should.equal(1);
+            done();
+          });
         });
       });
     });
