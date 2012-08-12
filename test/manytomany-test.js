@@ -47,6 +47,18 @@ describe('relationships', function() {
         });
       });
     });
+    
+    it('should filter', function(done) {
+      var a = new M({name: 'lol'});
+
+      a.set('gs', [new G({nick:'b'}), new G({nick:'c'})]);
+      a.save(function(e) {
+        M.find({fetch: ["g"], where: { id: a.get('id'), gs: { nick: 'b'} } }, function(e, res) {
+          res[0].get('gs')[0].get('nick').should.equal('b');
+          done();
+        });
+      });
+    });
 
   });
 
