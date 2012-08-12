@@ -2,7 +2,7 @@ var hater  = require('../lib/hater'),
     expect = require('expect.js'),
     assert = require('assert');
 
-hater.dialect('mysql', 'mysql://root:toor@localhost/test');
+hater.dialect('mysql', 'mysql://root@localhost/test');
 
 var Model = hater.extend('instance', {});
 
