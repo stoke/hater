@@ -11,6 +11,13 @@
   - [Models](#models)
     - [Defining Models](#m-definition)
     - [Instantiating Models](#m-instance)
+    - [Finding Models](#m-find)
+    - [Getters/Setters](#m-getset)
+    - [JSON](#m-json)
+  <br/><br/>
+  - [Relationships](#m-rel)
+    - [One to one](#m-onetoone)
+    - [One to many](#m-onetomany)
 
 <a id="getting"></a>    
 ## Getting started
@@ -98,6 +105,107 @@ instance2.save(function(e) {
 });
 
 ```
+
+<a id="m-find"></a>
+#### Find
+
+Hater provides ```find()``` and ```findOne``` to find documents in the database.
+
+```javascript
+Model.find({ where: { id: 1 } }, function(e. models) {
+  // models in an array
+});
+
+Model.findOne({ where: { id: 1 }, limit: [0,10] }, function(e, model) {
+  // here model is an instance
+});
+```
+
+<a id="m-getset"></a>
+#### Getters / Setters
+
+Getters and Setters are slower than regular functions in JS, therefore we decided to implement a ```get()``` and ```set()``` function
+
+```javascript
+instance.get('property');
+instance.set('property', 'newValue');
+```
+
+<a id="m-json"></a>
+#### JSON
+
+JSON.stringify returns the instance's properties with their respective values
+
+```javascript
+JSON.stringify(instance);
+// {"key": "value", "key2": "value2" ... }
+```
+
+<a id="m-rel"></a>
+## Relationships
+
+Hater supports:
+
+  - One To One
+  - One To Many
+  - Many To Many
+
+<a id="m-onetoone"></a>
+#### One to One
+
+Example of a one to one relationship:
+
+```javascript
+var Model = hater.define('model');
+Model.schema({ ... });
+
+var Other = hater.define('other');
+Other.schema({ ... });
+
+hater.Relationships.oneToOne(Model, Other);
+
+hater.sync();
+
+var m = new Model();
+m.set('other', new Other());
+m.save();
+
+Other.findOne({
+  where: { id: m.get('other').get('id') },
+  fetch: ["model"]
+}, function(e, res) {
+  other.get('model') // is m
+});
+```
+
+```fetch: ["model"]``` is a special clause that tells ```hater``` to pre-load datas that are related to the one we are querying
+
+<a id="m-onetomany"></a>
+#### One to Many
+
+Example of a one to many relationship:
+```javascript
+// Model and Other from previous example
+
+hater.Relationships.oneToMany(Model, Other);
+
+var m = new Model();
+m.set('others', [new Other(), new Other()]);
+m.save(function() {
+  Model.findOne({ where: { id: m.get('id') }, fetch: ["others"] }, function(e, res) {
+    res.get('others') // is the array we set in m
+  });
+});
+```
+
+We can also filter the children via the where clause
+
+```javascript
+Model.findOne({ where: { id: m.get('id'), others: { name: 'test' }, fetch: ["others"] }, function(e, res) {
+  res.get('others') // every others.name will be 'lol'
+});
+```
+
 </xmp>
 <script src="http://strapdownjs.com/v/0.1/strapdown.js"></script>
 </html>
