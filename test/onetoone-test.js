@@ -1,7 +1,7 @@
 var hater  = require('../lib/hater'),
     assert = require('assert');
 
-hater.connect('mysql', 'mysql://root:toor@127.0.0.1/test');
+hater.connect('postgresql', 'tcp://postgres@127.0.0.1/test');
 
 var Model = hater.define('model', {});
 
