@@ -9,7 +9,7 @@
   <br/><br/> 
   - [Models](#models)
     - [Define Models](#m-definition)
-    - [Instantiate Model](#m-instance)
+    - [Instantiating Models](#m-instance)
 
 <a id="getting"></a>    
 ## Getting started
@@ -36,7 +36,7 @@ hater.connect('postgresql', 'tcp://user:password@host/databaseName');
 <a id="m-definition"></a>
 #### Define Models
 
-To define a model you simply invoke the .extend() method from hater
+To define a model you only need to invoke the ```.define()``` method from ```hater```
 
 ```javascript
 var myModel = hater.define('mymodel');
@@ -68,7 +68,7 @@ hater.sync();
 ```
 
 <a id="m-instance"></a>
-#### Instantiate a Model
+#### Instantiating Models
 
 To create a model simply use use ```new``` or call ```.create()```
 
