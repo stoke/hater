@@ -83,6 +83,18 @@ describe('postgresql builder', function() {
     });
   });
 
+  describe('#limit', function() {
+    it('should return rows according to limit', function(done) {
+      new Query().select('hater', '*')
+        .limit(1)
+        .exec(function(err, rows) {
+          expect(err).to.not.be.ok();
+          expect(rows.length).to.be.equal(1);
+          done();
+        });
+    });
+  });
+
   describe('#delete', function() {
 
     it('should delete row from db', function(done) {
