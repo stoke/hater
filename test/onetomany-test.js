@@ -37,8 +37,11 @@ describe('relationships', function() {
 
       m.save(function(e) {
         One.findOne({ where: { id: m.get('id') }, fetch: ["manies"] }, function(e, res) {
-          console.log(res);
-          done();
+          res.get('manies')[0].get('many').should.equal('burp'); 
+          Many.findOne({ where: {id: res.get('manies')[0].get('id')}, fetch: ["one"]}, function(e, res) {
+            res.get('one').get('one').should.equal('lol');
+            done();
+          });
         });
 
       });
