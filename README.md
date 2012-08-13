@@ -7,6 +7,10 @@ Hater is an ORM for relational databases.
 
 Please note that, as this is an early release, stuff might (and probably will) break. If you have any problem please open an [Issue](https://github.com/yawnt/hater/issues)
 
+## Documentation
+
+See [here](http://yawnt.github.com/hater/documentation.html)
+
 ## Installation
 
 ```
