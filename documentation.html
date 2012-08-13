@@ -1,13 +1,87 @@
 <!DOCTYPE html>
 <html>
-<title>Hater - Documentation</title>
-<xmp theme="united">
+<title>Hater</title>
+<xmp theme="cerulean">
 ## Getting started
 
 #### Installation
 
 ```
 $ npm install hater
+```
+#### Configuration
+
+First of all, you need to choose which SQL dialect to use, this is straightforward
+
+```javascript
+var hater = require('hater');
+
+hater.dialect('postgresql', 'tcp://user:password@host/databaseName');
+```
+
+## Models
+
+#### Model definition
+
+To define a model you simply invoke the .extend() method from hater
+
+```javascript
+var myModel = hater.extend('mymodel');
+```
+
+To extend a Model's base prototype you can pass a second argument
+
+```javascript
+var myModel = hater.extend('mymodel', {
+  name: function() {
+    return this.get('name') + this.get('surname');
+  };
+});
+```
+
+To specify the Model's schema just pass a configuration object to ```.schema()```
+
+```javascript
+myModel.schema({
+  name   : hater.Types.String(),
+  surname: hater.Types.String({length: 32})
+});
+```
+
+Finally, you can create tables by calling
+
+```javascript
+hater.sync();
+```
+
+#### Model instantiation
+
+To create a model simply use use ```new``` or call ```.create()```
+
+```javascript
+// these three methods are equivalent
+var instance = new myModel({
+  name   : 'john',
+  surname: 'doe'
+});
+instance.save(function(e) {
+  // do something
+});
+  
+myModel.create({
+  name   : 'john',
+  surname: 'doe'
+}, function(e, instance) {
+  // do something
+});
+
+var instance2 = new myModel();
+instance2.set('name', 'john');
+instance2.set('surname', 'doe');
+instance2.save(function(e) {
+  // do something
+});
+
 ```
 </xmp>
 <script src="http://strapdownjs.com/v/0.1/strapdown.js"></script>
