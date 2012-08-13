@@ -55,7 +55,9 @@ describe('relationships', function() {
       a.save(function(e) {
         a.load({fetch: ["g"], where: { gs: { nick: 'b'} } }, function(e) {
           a.get('gs')[0].get('nick').should.equal('b');
-          done();
+          a.get('gs')[0].destroy(function(e) {
+            done();
+          });
         });
       });
     });
