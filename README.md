@@ -5,6 +5,8 @@ Hater is an ORM for relational databases.
 
 [![Build Status](https://secure.travis-ci.org/yawnt/hater.png?branch=master)](http://travis-ci.org/yawnt/hater)
 
+Please note that, as this is an early release, stuff might (and probably will) break. If you have any problem please open an [Issue](https://github.com/yawnt/hater/issues)
+
 ## Installation
 
 ```
