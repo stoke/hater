@@ -2,15 +2,15 @@ var assert = require('assert'),
     hater  = require('../lib/hater');
 
 
-hater.dialect('postgresql', 'tcp://postgres@localhost/test');
+hater.connect('postgresql', 'tcp://postgres@localhost/test');
 
-var One = hater.extend('one');
+var One = hater.define('one');
 
 One.schema({
   one: hater.Types.String()
 });
 
-var Many = hater.extend('many');
+var Many = hater.define('many');
 
 Many.schema({
   many: hater.Types.String()

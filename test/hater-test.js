@@ -3,18 +3,18 @@ var assert = require('assert'),
 
 describe('hater', function() {
   
-  describe('#extend', function() {
+  describe('#define', function() {
     
-    it('should have .extend', function() {
-      hater.extend.should.be.a('function');      
+    it('should have .define', function() {
+      hater.define.should.be.a('function');      
     });
 
   });
 
-  describe('#dialect', function() {
+  describe('#connect', function() {
 
-    it('should have .dialect', function() {
-      hater.dialect.should.be.a('function');
+    it('should have .connect', function() {
+      hater.connect.should.be.a('function');
     });
 
   });

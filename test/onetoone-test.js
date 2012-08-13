@@ -1,15 +1,15 @@
 var hater  = require('../lib/hater'),
     assert = require('assert');
 
-hater.dialect('postgresql', 'tcp://postgres@127.0.0.1/test');
+hater.connect('mysql', 'mysql://root:toor@127.0.0.1/test');
 
-var Model = hater.extend('model', {});
+var Model = hater.define('model', {});
 
 Model.schema({
   test: hater.Types.Integer()
 });
 
-var Other = hater.extend('other', {});
+var Other = hater.define('other', {});
 
 Other.schema({
   field: hater.Types.Integer()

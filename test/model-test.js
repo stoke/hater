@@ -2,9 +2,9 @@ var assert = require('assert'),
     expect = require('expect.js'),
     hater  = require('../lib/hater');
 
-hater.dialect('postgresql', 'tcp://postgres@127.0.0.1/test');
+hater.connect('postgresql', 'tcp://postgres@127.0.0.1/test');
 
-var Model = hater.extend('table', {
+var Model = hater.define('table', {
   test: function() {}
 });
 

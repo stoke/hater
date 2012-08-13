@@ -2,9 +2,9 @@ var hater  = require('../lib/hater'),
     expect = require('expect.js'),
     assert = require('assert');
 
-hater.dialect('postgresql', 'tcp://postgres@localhost/test');
+hater.connect('postgresql', 'tcp://postgres@localhost/test');
 
-var Model = hater.extend('instance', {});
+var Model = hater.define('instance', {});
 
 Model.schema({
   test: hater.Types.String({length: 32})

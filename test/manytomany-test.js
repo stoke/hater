@@ -1,13 +1,13 @@
 var assert = require('assert'),
     hater  = require('../lib/hater');
 
-hater.dialect('postgresql', 'tcp://postgres@localhost/test');
+hater.connect('postgresql', 'tcp://postgres@localhost/test');
 
-var M = hater.extend('m');
+var M = hater.define('m');
 M.schema({
   name: hater.Types.String()
 });
-var G = hater.extend('g');
+var G = hater.define('g');
 G.schema({
   nick: hater.Types.String()
 });
