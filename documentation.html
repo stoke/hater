@@ -8,8 +8,8 @@
     - [Configuration](#config)
   <br/><br/> 
   - [Models](#models)
-    - [Model definition](#m-definition)
-    - [Model instantiation](#m-instance)
+    - [Define Models](#m-definition)
+    - [Instantiate Model](#m-instance)
 
 <a id="getting"></a>    
 ## Getting started
@@ -23,29 +23,29 @@ $ npm install hater
 <a id="config"></a>
 #### Configuration
 
-First of all, you need to choose which SQL dialect to use, this is straightforward
+First of all, you need to choose which SQL dialect to use and to connect to the database, this is as simple as this:
 
 ```javascript
 var hater = require('hater');
 
-hater.dialect('postgresql', 'tcp://user:password@host/databaseName');
+hater.connect('postgresql', 'tcp://user:password@host/databaseName');
 ```
 <a id="models"></a>
 ## Models
 
 <a id="m-definition"></a>
-#### Model definition
+#### Define Models
 
 To define a model you simply invoke the .extend() method from hater
 
 ```javascript
-var myModel = hater.extend('mymodel');
+var myModel = hater.define('mymodel');
 ```
 
 To extend a Model's base prototype you can pass a second argument
 
 ```javascript
-var myModel = hater.extend('mymodel', {
+var myModel = hater.define('mymodel', {
   fullName: function() {
     return this.get('name') + this.get('surname');
   };
@@ -68,7 +68,7 @@ hater.sync();
 ```
 
 <a id="m-instance"></a>
-#### Model instantiation
+#### Instantiate a Model
 
 To create a model simply use use ```new``` or call ```.create()```
 
