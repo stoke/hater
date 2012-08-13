@@ -1,6 +1,7 @@
 var builder = require('../lib/builders/postgresql'),
     Query   = builder.Query;
     exec    = require('child_process').exec,
+    expect  = require('expect.js'),
     assert  = require('assert');
 
 describe('postgresql builder', function() {
