@@ -18,6 +18,7 @@
   - [Relationships](#m-rel)
     - [One to one](#m-onetoone)
     - [One to many](#m-onetomany)
+    - [Many to Many](#m-manytomany)
 
 <a id="getting"></a>    
 ## Getting started
@@ -112,11 +113,11 @@ instance2.save(function(e) {
 Hater provides ```find()``` and ```findOne``` to find documents in the database.
 
 ```javascript
-Model.find({ where: { id: 1 } }, function(e. models) {
+Model.find({ where: { id: 1 }, limit: [0,10] }, function(e. models) {
   // models in an array
 });
 
-Model.findOne({ where: { id: 1 }, limit: [0,10] }, function(e, model) {
+Model.findOne({ where: { id: 1 } }, function(e, model) {
   // here model is an instance
 });
 ```
@@ -189,6 +190,8 @@ Example of a one to many relationship:
 
 hater.Relationships.oneToMany(Model, Other);
 
+hater.sync();
+
 var m = new Model();
 m.set('others', [new Other(), new Other()]);
 m.save(function() {
@@ -204,6 +207,28 @@ We can also filter the children via the where clause
 Model.findOne({ where: { id: m.get('id'), others: { name: 'test' }, fetch: ["others"] }, function(e, res) {
   res.get('others') // every others.name will be 'lol'
 });
+```
+
+<a id="m-manytomany"></a>
+#### Many To Many
+
+Example of a many to many relationship:
+```javascript
+// Model and Other from previous example
+
+hater.Relationships.manyToMany(Model, Other);
+
+hater.sync();
+
+var m = new Model();
+m.set('others', [new Other(), new Other()]);
+m.save(function(e) {
+  Other.find({ fetch: ["ms"] }, function(e, res) {
+    var o = res.shift();
+    o.get('ms')[0] // is the m we saved
+  });
+});
+
 ```
 
 </xmp>
