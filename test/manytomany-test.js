@@ -36,10 +36,10 @@ describe('relationships', function() {
 
       m.save(function(e) {
         hater._models.mG.find({}, function(err, res) {
-          G.find({fetch: ["m"]}, function(e, res) {
+          G.find({fetch: ["ms"]}, function(e, res) {
             var first = res.shift();
             first.get('ms')[0].get('name').should.equal('asd');
-            M.find({where: {id: 1}, fetch: ["g"]}, function(e, res) {
+            M.find({where: {id: 1}, fetch: ["gs"]}, function(e, res) {
               res[0].get('gs')[0].get('nick').should.equal('lol');
               done();
             });
@@ -53,7 +53,7 @@ describe('relationships', function() {
 
       a.set('gs', [new G({nick:'b'}), new G({nick:'c'})]);
       a.save(function(e) {
-        a.load({fetch: ["g"], where: { gs: { nick: 'b'} } }, function(e) {
+        a.load({fetch: ["gs"], where: { gs: { nick: 'b'} } }, function(e) {
           a.get('gs')[0].get('nick').should.equal('b');
           a.get('gs')[0].destroy(function(e) {
             done();
