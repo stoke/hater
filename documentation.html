@@ -224,9 +224,9 @@ hater.sync();
 var m = new Model();
 m.set('others', [new Other(), new Other()]);
 m.save(function(e) {
-  Other.find({ fetch: ["ms"] }, function(e, res) {
+  Other.find({ fetch: ["models"] }, function(e, res) {
     var o = res.shift();
-    o.get('ms')[0] // is the m we saved
+    o.get('models')[0] // is the m we saved
   });
 });
 
