@@ -19,6 +19,7 @@
     - [One to one](#m-onetoone)
     - [One to many](#m-onetomany)
     - [Many to Many](#m-manytomany)
+    - [Load](#m-load)
 
 <a id="getting"></a>    
 ## Getting started
@@ -230,7 +231,18 @@ m.save(function(e) {
 });
 
 ```
+<a id="m-load"></a>
+### Load
 
+If you want to lazy load relationships (eg in the many to many case) you can use ```.load()```
+
+```javascript
+One.findOne({ where: { id: 1 } }, function(e, instance) {
+  instance.load(["others"], function(e) {
+    instange.get("others") // relationship
+  });
+});
+```
 </xmp>
 <script src="http://strapdownjs.com/v/0.1/strapdown.js"></script>
 </html>
