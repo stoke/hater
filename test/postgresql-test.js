@@ -1,6 +1,7 @@
 var builder = require('../lib/builders/postgresql'),
     Query   = builder.Query;
     exec    = require('child_process').exec,
+    expect  = require('expect.js'),
     assert  = require('assert');
 
 describe('postgresql builder', function() {
@@ -80,6 +81,18 @@ describe('postgresql builder', function() {
             });
         });
 
+    });
+  });
+
+  describe('#limit', function() {
+    it('should return rows according to limit', function(done) {
+      new Query().select('hater', '*')
+        .limit(1)
+        .exec(function(err, rows) {
+          expect(err).to.not.be.ok();
+          expect(rows.length).to.be.equal(1);
+          done();
+        });
     });
   });
 
