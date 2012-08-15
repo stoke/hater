@@ -13,8 +13,18 @@ See [here](http://yawnt.github.com/hater/documentation.html)
 
 ## Installation
 
+Altough hater is available in the npm registry, we suggest you use the master branch of this github repo because of the early development stage.
+
+Via npm:
+
 ```
 $ npm install hater
+```
+
+Via git:
+
+```
+$ npm install git://github.com/yawnt/hater.git
 ```
 
 ## Test
