@@ -10,6 +10,7 @@
   <br/><br/> 
   - [Models](#models)
     - [Defining Models](#m-definition)
+    - [Validating Properties](#m-validate)
     - [Instantiating Models](#m-instance)
     - [Finding Models](#m-find)
     - [Getters/Setters](#m-getset)
@@ -75,6 +76,19 @@ Finally, you can create tables by calling
 
 ```javascript
 hater.sync();
+```
+
+<a id="m-validate"></a>
+#### Validating Properties
+
+```hater``` uses ```revalidator``` to validate properties, check [it](https://github.com/flatiron/revalidator) out to see how it works
+
+```javascript
+var Model = hater.define('model');
+
+Model.schema({
+  test: hater.Types.String({ validate: { minLength: 5 } });
+})
 ```
 
 <a id="m-instance"></a>
