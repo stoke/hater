@@ -1,7 +1,6 @@
 var assert = require('assert'),
     hater  = require('../lib/hater');
 
-
 hater.connect('postgresql', 'tcp://postgres@localhost/test');
 
 var One = hater.define('one');

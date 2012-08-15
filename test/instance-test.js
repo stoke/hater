@@ -7,7 +7,7 @@ hater.connect('postgresql', 'tcp://postgres@localhost/test');
 var Model = hater.define('instance', {});
 
 Model.schema({
-  test: hater.Types.String({length: 32})
+  test: hater.Types.String({length: 32, validate: { type: 'string' } } )
 });
 
 describe('Instance', function() {
@@ -99,7 +99,7 @@ describe('Instance', function() {
         expect(r[0].get('test')).to.be.eql('test');
         done();
       });
-    })
+    });
   });
 
   describe('#findOne', function() {
@@ -119,5 +119,13 @@ describe('Instance', function() {
       });
     });
   });
-
+  
+  describe('validate', function() {
+    it('should throw error when not valid', function(done) {
+      Model.create({test: 1}, function(e) {
+        e[0].message.should.equal('must be of string type');
+        done();
+      }); 
+    });
+  });
 });
