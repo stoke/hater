@@ -24,8 +24,8 @@ describe('relationships', function() {
   describe('oneToOne', function() {
 
     it('should setup right fields in Models', function() {
-      Model._schema.other_id.should.equal('INT');
-      Other._schema.model_id.should.equal('INT');
+      Model._schema.other_id.should.be.a('object');
+      Other._schema.model_id.should.be.a('object');
     });
     
 

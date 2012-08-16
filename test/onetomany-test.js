@@ -24,7 +24,7 @@ describe('relationships', function() {
   describe('oneToMany', function() {
      
     it('should setup right fields in schema', function() {
-      Many._schema.one_id.should.be.a('string');
+      Many._schema.one_id.should.be.a('object');
       
       hater._relationships.belongsTo.many.indexOf('one').should.not.equal(-1);
       hater._relationships.hasMany.one.indexOf('many').should.not.equal(-1);
@@ -35,7 +35,8 @@ describe('relationships', function() {
 
       m.save(function(e) {
         One.findOne({ where: { id: m.get('id') }, fetch: ["manies"] }, function(e, res) {
-          res.get('manies')[0].get('many').should.equal('burp'); 
+          res.get('manies')[0].get('many').should.equal('burp');
+          console.log('hai'); 
           Many.findOne({ where: {id: res.get('manies')[0].get('id')}, fetch: ["one"]}, function(e, res) {
             res.get('one').get('one').should.equal('lol');
             done();
