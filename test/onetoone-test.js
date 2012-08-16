@@ -17,10 +17,8 @@ Other.schema({
 
 describe('relationships', function() {
 
-  before(function(done) {
+  before(function() {
     hater.Relationships.oneToOne(Model, Other);
-    hater.sync()
-      .on('success', done);
   });
 
   describe('oneToOne', function() {

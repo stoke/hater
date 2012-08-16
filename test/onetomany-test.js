@@ -17,9 +17,8 @@ Many.schema({
 
 describe('relationships', function() {
 
-  before(function(done) {
+  before(function() {
     hater.Relationships.oneToMany(One, Many);
-    hater.sync().on('success', done);
   });
 
   describe('oneToMany', function() {
