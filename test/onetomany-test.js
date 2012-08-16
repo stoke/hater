@@ -19,7 +19,16 @@ describe('relationships', function() {
 
   before(function(done) {
     hater.Relationships.oneToMany(One, Many);
-    hater.sync().on('success', done);
+    var Query = hater.builder.Query;
+    new Query()
+      .drop('manies')
+      .exec(function() {
+        new Query()
+          .drop('ones')
+          .exec(function() {
+            hater.sync().on('success',done);
+          });
+      });
   });
 
   describe('oneToMany', function() {
