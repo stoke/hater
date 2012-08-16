@@ -4,7 +4,7 @@
   "contributors": [
     "stoke <stoke@urlship.com>"
   ],
-  "version"     : "0.0.6",
+  "version"     : "0.0.7",
 
   "dependencies": {
     "pg"           : "0.8.1",
