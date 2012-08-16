@@ -17,15 +17,25 @@ Other.schema({
 
 describe('relationships', function() {
 
-  before(function() {
+  before(function(done) {
     hater.Relationships.oneToOne(Model, Other);
+    var Query = hater.builder.Query;
+    new Query()
+      .drop('others')
+      .exec(function() {
+        new Query()
+          .drop('models')
+          .exec(function() {
+            hater.sync().on('success', done);
+          });
+      });
   });
 
   describe('oneToOne', function() {
 
     it('should setup right fields in Models', function() {
-      Model._schema.other_id.should.be.a('object');
-      Other._schema.model_id.should.be.a('object');
+      Model._schema.other_id.should.be.a('string');
+      Other._schema.model_id.should.be.a('string');
     });
     
 
