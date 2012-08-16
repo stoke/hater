@@ -34,9 +34,10 @@ describe('relationships', function() {
       var m = new One({one: 'lol', manies: [new Many({many: 'burp'})]});
 
       m.save(function(e) {
+        console.log(e);
         One.findOne({ where: { id: m.get('id') }, fetch: ["manies"] }, function(e, res) {
           res.get('manies')[0].get('many').should.equal('burp');
-          console.log('hai'); 
+          
           Many.findOne({ where: {id: res.get('manies')[0].get('id')}, fetch: ["one"]}, function(e, res) {
             res.get('one').get('one').should.equal('lol');
             done();
