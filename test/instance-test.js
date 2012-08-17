@@ -2,7 +2,7 @@ var hater  = require('../lib/hater'),
     expect = require('expect.js'),
     assert = require('assert');
 
-hater.connect('postgresql', 'tcp://postgre@localhost/test');
+hater.connect('postgresql', 'tcp://postgres@localhost/test');
 
 var Model = hater.define('instance', {});
 
