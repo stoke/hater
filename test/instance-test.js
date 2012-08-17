@@ -84,19 +84,18 @@ describe('Instance', function() {
 
   describe('#findOrCreate', function() {
     it('should find when a row exist', function(done) {
-      Model.findOrCreate({ test: 'asd' }, function(e, r) {
-        Model.findOrCreate({ test: 'asd' }, function(e, ro) {
-          expect(r[0].get('id')).to.be.eql(ro[0].get('id'));
+      Model.findOrCreate({ where: { test: 'asd' } }, function(e, r) {
+        Model.findOrCreate({ where: { test: 'asd' } }, function(e, ro) {
+          expect(ro.get('id')).to.be.eql(ro.get('id'));
           done();
         });
       });
     });
 
     it("should create when a row doesn't exist", function(done) {
-      Model.findOrCreate({ test: 'test' }, function(e, r) {
+      Model.findOrCreate({ where: { test: 'test' } }, function(e, r) {
         expect(e).to.not.be.ok();
-        expect(r).to.be.an('array');
-        expect(r[0].get('test')).to.be.eql('test');
+        expect(r.get('test')).to.be.eql('test');
         done();
       });
     });
