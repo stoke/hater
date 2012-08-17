@@ -24,6 +24,6 @@
   },
 
   "scripts": {
-    "test": "mocha -R spec -r should test/*-test.js"
+    "test": "mocha --timeout 10000 -R spec -r should test/*-test.js"
   }
 }
