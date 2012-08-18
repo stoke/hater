@@ -11,8 +11,14 @@ var G = hater.define('g');
 G.schema({
   nick: hater.Types.String()
 });
+var C = hater.define('c');
+C.schema({
+  c: hater.Types.Integer()
+});
+
 
 hater.Relationships.manyToMany(M, G);
+hater.Relationships.manyToMany(M, C);
 
 describe('relationships', function() {
 
