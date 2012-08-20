@@ -49,7 +49,8 @@ describe('Instance', function() {
     });
 
     it('should save the row when called from find (with id)', function(done) {
-      Model.find('*', function(e, r) {
+      Model.find({ limit: { instance: 1 } }, function(e, r) {
+        console.log(r);
         r[0].set('test', 'testa');
         r[0].save(function(e, r) {
           expect(e).not.to.be.ok();
