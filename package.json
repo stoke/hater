@@ -7,7 +7,7 @@
   "version"     : "0.0.9",
 
   "dependencies": {
-    "pg"           : "0.8.1",
+    "pg"           : "0.8.3",
     "eventemitter2": "0.4.9",
     "optimal"      : "0.0.3",
     "mysql"        : "git://github.com/stoke/node-mysql.git",
