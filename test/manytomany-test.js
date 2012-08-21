@@ -42,6 +42,7 @@ describe('relationships', function() {
 
       m.save(function(e) {
         hater._models.mG.find({}, function(err, res) {
+          console.log('ggg');
           G.find({fetch: ["ms"]}, function(e, res) {
             var first = res.shift();
             first.get('ms')[0].get('name').should.equal('asd');
