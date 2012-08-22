@@ -66,4 +66,26 @@ describe('mysql builder', function() {
         });
     });
   });
+  
+  describe('#orderBy', function() {
+
+    it('should order DESC', function(done) {
+      new Query()
+        .insert('test', { test: 'ccc' })
+        .exec(function() {
+          new Query()
+            .insert('test', { test: 'asd' })
+            .exec(function() {
+              new Query()
+                .select('test', '*')
+                .orderBy({ id: 'DESC' })
+                .exec(function(e, res) {
+                  res[0].id.should.be.above(res[1].id);
+                  done();
+                });
+            });
+        });
+    });
+  });
+
 });

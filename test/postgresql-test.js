@@ -115,4 +115,24 @@ describe('postgresql builder', function() {
     });
   });
 
+  describe('#orderBy', function() {
+
+    it('should order DESC', function(done) {
+      new Query()
+        .insert('hater', { test: 'ccc' })
+        .exec(function() {
+          new Query()
+            .insert('hater', { test: 'asd' })
+            .exec(function() {
+              new Query()
+                .select('hater', '*')
+                .orderBy({ id: 'DESC' })
+                .exec(function(e, res) {
+                  res[0].id.should.be.above(res[1].id);
+                  done();
+                });
+            });
+        });
+    });
+  });
 });
