@@ -68,6 +68,17 @@ describe('relationships', function() {
       });
     });
 
+    it('should work with unlink', function(done) {
+      M.findOne({ where: { name: 'asd' }, fetch: ["gs"] }, function(e, res) {
+        var n = res.get('gs').length;
+        res.unlink(res.get('gs')[0]);
+        M.findOne({ where: {name: 'asd'}, feetch: ["gs"]}, function(e, res) {
+          n.should.not.eql(res.get('gs'));
+          done();
+        });
+      });
+    });
+
   });
 
 });
