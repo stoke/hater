@@ -7,7 +7,8 @@ hater.connect('postgresql', 'tcp://postgres@localhost/test');
 var Model = hater.define('instance', {});
 
 Model.schema({
-  test: hater.Types.String({length: 32, validate: { type: 'string' } } )
+  test: hater.Types.String({length: 32, validate: { type: 'string' }}),
+  asd: hater.Types.String({ unique: true })
 });
 
 describe('Instance', function() {
