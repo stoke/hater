@@ -127,4 +127,15 @@ describe('Instance', function() {
       }); 
     });
   });
+
+  describe('unique', function() {
+
+    it('should avoid creating field with same value', function(done) {
+      Model.create({ test: 'asd'}, function(e, res) {
+        e.should.not.equal(null);
+        done();
+      });
+    });
+
+  });
 });
