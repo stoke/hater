@@ -132,8 +132,10 @@ describe('Instance', function() {
 
     it('should avoid creating field with same value', function(done) {
       Model.create({ test: 'asd'}, function(e, res) {
-        e.should.not.equal(null);
-        done();
+        Model.find({ where: { test: 'asd' } }, function(e, res) {
+          res.length.should.equal(1);
+          done();
+        });
       });
     });
 
